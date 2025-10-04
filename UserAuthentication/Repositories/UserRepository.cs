@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿
+using System.Net;
 using Microsoft.EntityFrameworkCore;
 using UserAuthentication.ApplicationDbContext;
 using UserAuthentication.DTO_s;
@@ -8,15 +9,13 @@ using UserAuthentication.Utilities.Exceptions;
 
 namespace UserAuthentication.Repositories;
 
-public class UserRepository: IUserRepository
+public class UserRepository(
+    IConfiguration _config,
+    UserDbContext _context
+    ): IUserRepository
 {
     
-    private readonly UserDbContext _context;
     
-    public UserRepository(UserDbContext context)
-    {
-        _context = context;
-    }
     
     public async Task<List<User>> GetAllUsers()
     {
@@ -31,9 +30,28 @@ public class UserRepository: IUserRepository
             UserName = user.UserName,
             Password = user.Password,
         };
+        
         await _context.Users.AddAsync(newUser);
         await _context.SaveChangesAsync();
         
         return newUser;
     }
+
+    public async Task<User> GetUserByUserName(UserDTO user)
+    {
+        User existingUser = await _context.Users.FirstOrDefaultAsync(ele => ele.UserName == user.UserName);
+
+        if (existingUser is null)
+        {
+            throw new CustomException(
+                HttpStatusCode.NotFound
+                ,"User not found");
+        }
+
+        return existingUser;
+    }
+
+    
+    
+    
 }

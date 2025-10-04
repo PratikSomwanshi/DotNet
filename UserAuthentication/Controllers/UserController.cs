@@ -1,9 +1,9 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UserAuthentication.DTO_s;
 using UserAuthentication.Models;
 using UserAuthentication.Services.Interfaces;
-using UserAuthentication.Utilities.Exceptions;
+using UserAuthentication.Utilities.Responses;
 
 namespace UserAuthentication.Controllers;
 
@@ -12,15 +12,37 @@ namespace UserAuthentication.Controllers;
 public class UserController(IUserService _userService)
 {
     [HttpGet]
-    public async Task<List<User>> GetAllUsers()
+    public async Task<SuccessResponse<List<User>>> GetAllUsers()
     {
-        
-        return await _userService.GetAllUsers();
+        List<User> users = await _userService.GetAllUsers();
+
+        SuccessResponse<List<User>> res = new(
+                "Successfully retrieved all users",
+                users
+            );
+
+        return res;
     }
 
     [HttpPost]
-    public async Task<User> CreateUser(UserDTO user)
+    public async Task<SuccessResponse<UserRegistrationDTO>> CreateUser(UserDTO user)
     {
-        return await _userService.CreateUser(user);
+        User u = await _userService.CreateUser(user);
+
+        UserRegistrationDTO reg = new(user.UserName);
+        
+        SuccessResponse<UserRegistrationDTO> res = new (
+            "Successfully created user",
+            reg
+        );
+        
+        return res;
+    }
+
+    [HttpPost]
+    [Route("login")]
+    public async Task<UserLoginDTO> Login([FromBody] UserDTO user)
+    {
+        return await _userService.Login(user);
     }
 }

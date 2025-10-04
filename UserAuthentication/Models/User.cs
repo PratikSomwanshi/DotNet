@@ -13,5 +13,11 @@ public class User
     
     [Required]
     public string Password { get; set; } =  string.Empty;
-    
+
+    public string Roles { get; set; } = "User";
+
+    public override string ToString()
+    {
+        return $"User {{ Id = {Id}, UserName = {UserName}, Password = {Password} Roles = {Roles} }}";
+    }
 }

@@ -7,5 +7,9 @@ public interface IUserRepository
 {
     public Task<List<User>> GetAllUsers();
     
+    public Task<User> GetUserByUserName(UserDTO user);
+    
     public Task<User> CreateUser(UserDTO user);
+
+    
 }

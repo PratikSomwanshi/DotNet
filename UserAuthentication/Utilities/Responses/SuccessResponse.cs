@@ -1,9 +1,9 @@
 ﻿namespace UserAuthentication.Utilities.Responses;
 
-public class SuccessResponse<T>(bool status, string message, T data)
+public class SuccessResponse<T>(string message, T data)
 {
-    public bool Status { get; set; }
-    public string Message { get; set; }
-    public T Data  { get; set; }
-    
+    public bool Status { get; set; } = true;
+    public string Message { get; set; } = message;
+    public T Data { get; set; } = data;
+
 }
