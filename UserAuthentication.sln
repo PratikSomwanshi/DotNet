@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAuthentication", "UserAuthentication\UserAuthentication.csproj", "{C9F2BA24-E776-44E9-A16E-DF063E872754}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9F2BA24-E776-44E9-A16E-DF063E872754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9F2BA24-E776-44E9-A16E-DF063E872754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9F2BA24-E776-44E9-A16E-DF063E872754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9F2BA24-E776-44E9-A16E-DF063E872754}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
